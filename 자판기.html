@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <script src="자판기re.js"></script>
+        <link rel="stylesheet" href="자판기.css">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <!-- 정보만 입력되어 있는 것 == 이렇게 쓸거다 -->
+<body>
+    
+    <!-- class border는 가장 큰 네모(자판기) 이 div 안에 각각의 구성요소가 들어간다.
+    그 다음은 class drink container로 이 안에는 사이다, 콜라, 비타민 음료가 들어간다 
+     각각에는 가격이 다 다르므로, 또 다른 div가 필요하다. 컨테니어 밑에 가격이 들어가고
+    그 안에 물건 이름이 들어가므로 이를 주의해서 작성한다.-->
+    <div class="border"> 
+        <div class="drink_container">
+            <div class="price">
+                <div class="drink"> 사이다</div> 
+                500원
+            </div>
+            <div class="price">
+                <div class="drink"> 콜라</div>
+                1000원
+            </div>
+            <div class="price">
+                <div class="drink"> 비타민음료</div>
+                300원
+            </div>
+        </div>
+    <!-- 이제 자판기 윗 부분에서 동전투입에 동작하는 버튼을 만든다. 
+    js에서 만든 함수들이 연결되어야 하므로 주의한다. button1 괄호안에는 동전이 들어간다.
+    각각 100, 500, 1000원의 동전 버튼을 만들어준다.-->
+    <div class="buttons">
+        <button class="insert_button" onclick="button1_click(100)"> 100 </button>
+        <button class="insert_button" onclick="button1_click(500)"> 500 </button>
+        <button class="insert_button" onclick="button1_click(1000)"> 1000 </button>
+    </div>
+    <!--동전이 투입되었을 때, 투입금액이 결과로 나오는 버튼을 만든다.   
+    이때 투입금액은 처음에는 0이고, 버튼을 클릭할 때 돈이 들어오는 걸 잘 생각한다.
+    즉 id는 log형식으로 받아져야 한다.-->
+    <div class="result">
+        <button class="result_button" onclick="button2_click()"> 결과출력 </button>
+    </div>
+    <div class="console" id="log"> 투입금액:0</div>
+    </div>
+</body>
+</html>

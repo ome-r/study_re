@@ -1,0 +1,56 @@
+    /* border 가장 큰 네모박스로, 가로는 짧고 세로는 긴 모양이다.
+    console은 돈이 들어갔을 때 결과가 나오는 곳으로 border 안에 들어가 있어야 한다.
+    drink는 음료수들로, display에는 flex가 쓰였다.
+    buttons는 button1들에만 적용되는 값으로 내부여백이 들어갔다.
+    insert_btn에는 둥글게 하는 값과 여백 등이 들어가 있다. solid는 왜 뺐을까?
+    result는 결과출력이라는 버튼이 담기는 곳이다. 
+    왜 그냥 flex가 아닌 inline-flex를 썼을까?
+    price는 동전들이 들어가는 css이다.*/
+
+    .border{
+        width: 350px;
+        height: 700px;
+        border: 1px solid black;
+    }
+    .console {
+        align-content: center;
+        width: 250px;
+        height: 100px;
+        border: 1px solid black;
+        margin-left: 50px;
+    }
+    .drink {
+        display: inline-flex;
+        align-content: center;
+        margin: 30px 30px 0px 30px;
+        width: 50px;
+        height: 50px;
+        border : 1px solid black;
+        font-size: 5px;
+        justify-content: center;
+        align-items: center;
+    }
+    .buttons {
+        margin-bottom : 200px;
+    }
+    .insert_button {
+        border-radius: 100px;
+        margin: 30px;
+        width: 50px;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
+    }
+    .result {
+        height: 30px;
+        margin-left: 230px;
+    }
+    .drink_container {
+        margin-top : 30px;
+        display: inline-flex;
+        font-size: 5px;
+    }
+    .price {
+        text-align: center;
+        margin-bottom : 100px;
+    }
