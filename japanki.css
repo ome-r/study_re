@@ -1,0 +1,84 @@
+.outer{
+    border: 3px solid black;
+    width: 350px;
+    height: 700px;
+    padding: 10px;
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+    'a b c'
+    'd e f'
+    'g g h'
+    'i i i'
+    ;
+    grid-column-gap: 30px;
+    grid-row-gap: 70px;
+}
+.inner_item {
+    display: grid;
+    grid-template-columns: 25px;
+    grid-template-rows: 40px;
+    grid-gap: 2px;
+    font-size: 5px;
+    text-align: center;
+}
+
+.inner_item:nth-child(1) {
+    grid-area: a;
+}
+
+.inner_item:nth-child(1),
+.inner_item:nth-child(2),
+.inner_item:nth-child(3),
+.inner_item:nth-child(4),
+.inner_item:nth-child(5),
+.inner_item:nth-child(6),
+.inner_item:nth-child(8) {
+    border: 3px solid black;
+    margin-top: 70px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+.inner_item:nth-child(4),
+.inner_item:nth-child(5),
+.inner_item:nth-child(6){
+    border-radius: 100%;
+    grid-template-columns: 50px;
+    grid-template-rows: 50px;
+    /* display: flex; 타원으로 적용됨 */
+    justify-content : center;
+    align-items: center;
+}
+
+.inner_item:nth-child(7) {
+    display: grid;
+    grid-template-columns: 25px;
+    grid-template-rows: 40px;
+    grid-gap: 2px;
+    grid-area: g;
+}
+
+.inner_item:nth-child(8) {
+    grid-area: h;
+}
+
+.inner_item:nth-child(9){
+    grid-area: i;
+    border: 3px solid black;
+    grid-template-columns: 50px;
+    grid-template-rows: 110px;
+}
+
+/* .inner_item:nth-child(1) .flex_container{  요놈도 가능, container는 가독성 목적*/
+.container .inner_item:nth-child(1) .flex_container{
+    display: flex;
+    height: 80px;
+    width: 70px;
+    justify-content: space-between;
+    flex-direction: column;
+}
