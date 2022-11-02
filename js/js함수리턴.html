@@ -1,0 +1,33 @@
+ 
+<!-- javascript-->
+<html>
+ <head>
+  <title>javascript</title>
+ </head>
+ 
+<!-- 리턴이라는 개념 
+함수가 실행결과로서 어떤 결과값을 반환하면, 그걸 리턴한다 라고 표현해요.
+
+    아래 코드를 보면 test 함수는 testing이라는 함수를 실행,
+    return(반환)된 값을 alert를 이용해 메세지를 띄우는 것
+    만약, testing 함수에 return이라는 것이 없다면, 아무것도 뜨지 않을거예요.
+    코드를 보면 testing함수에는 return a; 라고 되어있기 때문에, 
+    방금 인자로 받은 "안뇽" 이라는 글씨를 return 하는 것이다
+    return 받은 "안뇽" 이라는값을 test함수에서 alert를 통해 출력하는 거
+
+    리턴 값이 있는 함수도 많고, 리턴 값이 없는 함수도 정말 많아요!
+    그래서 항상 어떤 함수를 사용할 때는 주의해서 사용하자-->
+ <body>
+  <script>
+   function test(){
+    alert( testing("안뇽") );
+   }
+ 
+   function testing(a){
+    return a;
+   }
+  </script>
+  
+  <a href ="javascript:test();">눌러봐</a>
+ </body>
+</html>
