@@ -56,29 +56,45 @@
 }
 
 .inner_item:nth-child(7) {
-    display: grid;
-    grid-template-columns: 25px;
-    grid-template-rows: 40px;
-    grid-gap: 2px;
-    grid-area: g;
+    /* display: grid; */
+    grid-template-columns: 50px;
+    grid-template-rows: 50px;
+    justify-content : center;
+    align-items: center;
+    /* grid-gap: 2px; */
+    /* grid-area: g; */
 }
 
 .inner_item:nth-child(8) {
     grid-area: h;
+    grid-template-columns: 50px;
+    grid-template-rows: 50px;
+    align-items: center;
+    justify-content: center;
 }
 
 .inner_item:nth-child(9){
     grid-area: i;
     border: 3px solid black;
-    grid-template-columns: 50px;
-    grid-template-rows: 110px;
+    grid-template-columns: 300px;
+    grid-template-rows: 100px;
 }
 
 /* .inner_item:nth-child(1) .flex_container{  요놈도 가능, container는 가독성 목적*/
-.container .inner_item:nth-child(1) .flex_container{
+.container .inner_item .flex_container{
     display: flex;
     height: 80px;
-    width: 70px;
-    justify-content: space-between;
+    width: 50px;
+    align-items: center;
+    justify-content: space-around;
     flex-direction: column;
+}
+
+#howMuch {
+    display: grid;
+    grid-template-columns: 250px;
+    grid-template-rows: 100px;
+    grid-gap: 2px;
+    font-size: 5px;
+    text-align: left;
 }
