@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <script>  
+            var price = 24000;
+            function calculate( obj ) {  //함수 호출할 때 있는 애 =매개변수 , obj로 input 태그가 들어감
+                if ( obj.checked ) price = price + Number(obj.value);  // input한줄이 체킹되어 있다면
+                else price = price - Number(obj.value);
+
+                var total = document.querySelector("#total");
+                total.innerText = price + "원";
+            }      
+        </script>
+    </head>
+    <body>
+        <h2>피자 주문</h2>
+        <fieldset>
+            <legend>사이즈</legend> 
+            Large - 24000원
+        </fieldset>
+        <fieldset>
+            <legend>추가 주문</legend>
+            <p>
+                <input type="checkbox" class="checkbox" value="800" id="피클" onclick="calculate(this);"> // 여기서 this는 input전체, input태그를 다 들고 calculate로 가라
+                <label for="피클">피클(800원)</label>
+            </p>
+            <p>
+                <input type="checkbox" class="checkbox" value="300" id="칠리" onclick="calculate(this);">
+                <label for="칠리">칠리 소스(300원)</label>
+            </p>
+            <input type="checkbox" class="checkbox" value="200" onclick="calculate(this);"> 디핑 소스(200원) <br>
+            <input type="checkbox" class="checkbox" value="4800" onclick="calculate(this);"> 치즈스틱(4개, 4800원) <br>
+            <input type="checkbox" class="checkbox" value="2400" onclick="calculate(this);"> 콘 샐러드(2400원) <br>
+        </fieldset>
+        <fieldset>
+            <legend>합계</legend>
+            <p id="total"></p>
+        </fieldset>
+    </body>
+</html>

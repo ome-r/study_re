@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <script>
+            // 변수는 두종류가있음. 
+            // 하나는 함수 내부에서만 쓰는거 (함부 밖에서 못씀) 지역변수
+            // 하나는 함수 밖에 있는 변수. 이건 모오오오오든 함수 전부다 쓸 수 있음 함수 밖에서도 쓸수있음. 전역변수
+
+            var cnt = 1;
+            var str = at;
+            function abc(){
+                var at = "abcdefg" ;
+                var a = "abcdefg" ;
+                var cnt = "abcde"
+                
+                // break; 반복문 안에서 벗어나기. 반복문안에서만 씀
+                // return; 함수 안에서 함수 호출한부분으로 돌아가기.
+                return a; //a값을 들고 호출부분으로 돌아가기.
+
+                var a = "abcdefg" ;
+                var a = "abcdefg" ;
+            }
+
+            function abc1(){
+                var a = abcdefg ;
+                return;
+            }
+            
+            abc(); // 만약 위에서 return a를 했으면 abc() 는 "abcdefg"와 같아진다.
+
+            //함수 정의 function  함수이름() {~~~}
+            //함수 호출 함수이름() 끝
+            function writeNote(){
+                console.log(document.getElementById("name").type);
+                var name = document.getElementById("name").value; // name이란 id갖고있는 놈 "값"을 name변수에다 쳐너
+                var content = document.getElementById("content").value; // content이란 id갖고있는 놈 "값"을 content변수에다 쳐너
+
+                var table = document.getElementById("table"); // name이란 id갖고있는 놈을 name변수에다 쳐너
+                var garo = document.createElement("tr");      // tr이란 놈을 만드셈
+
+                var kan1 = document.createElement("td");      // td란놈을 만드셈
+                kan1.innerText = cnt; // kan1 이란 변수의 (.)== "의" , 이때 .은 점점 작은 단위 순으로 작성한다. document안의 creatElement안의 value이런식
+                cnt = cnt + 1;
+                
+                var kan2 = document.createElement("td");
+                kan2.innerText = name;
+                
+                var kan3 = document.createElement("td");
+                kan3.innerText = content;
+
+                var kan4 = document.createElement("td");
+                var date = new Date(); // new는 객체를 생성하는 거임. 객체 = int, string, 하나의 새로운 형태
+                kan4.innerText = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+
+                // console.log( date );
+                
+                
+
+                garo.append(kan1); // append 여러개 집어 넣을수 있어.
+                garo.append(kan2); // 한개만 
+                garo.append(kan3); // 참고 https://dev.to/ibn_abubakre/append-vs-appendchild-a4m
+                garo.append(kan4); // 가로 태그 안에 kan4 태그 넣어 
+                table.append(garo);
+                
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <p>방명록입니다.</p>
+            
+            <div>
+                 <table class="tbl">
+                 <tr>
+                     <th>작성자</th>
+                     <td>
+                         <input type="text" id="name" style="width: 150px;">
+                     </td>
+                 </tr>
+                 <tr>
+                     <th>내용</th>
+                     <td>
+                         <input type="text" id="content" style="width: 560px;">
+                     </td>
+                 </tr>
+                 </table>
+                 
+                 <br>
+                 <button type="button" onclick="writeNote();">작성</button>
+                 
+                 <br><br>
+         
+                 <table id="table" border="1" cellpadding="10" cellspacing="1">
+                     <tr>
+                         <th>번호</th>
+                         <th>작성자</th>
+                         <th>내용</th>
+                         <th>작성일</th>
+                     </tr>
+                     <!-- <tr>
+                        <th>번호</th>
+                        <th>작성자</th>
+                        <th>내용</th>
+                        <th>작성일</th>
+                    </tr>
+                    <tr>
+                        <th>번호</th>
+                        <th>작성자</th>
+                        <th>내용</th>
+                        <th>작성일</th>
+                    </tr> -->
+                 </table>
+            </div>
+         </div>
+    </body>
+</html>

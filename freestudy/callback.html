@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <script type="text/javascript">
+       
+        // 함수는 절차지향 xx 객체처럼 인식, 값이 지정되어 있으면 어디서든 사용 가능
+        // 전역변수와 블록변수 차이 알기
+        // 함수 땡기는게 호이스팅
+        var a=0;
+        var b=1;
+        aa();
+
+        function aa(){
+            console.log(a);
+            bb();
+        };
+        
+        function bb(){
+            console.log(b);
+        };
+
+
+// 1-1. 함수 변수 선언 방식 
+// 전역 개념 및 선언 방식 
+
+// 전역 선언 전체적인 구역에 사용을 할수있도록 선언을 한다.
+
+// ex: 
+
+// var i = 1;
+
+// // const or function을 통해 어떠한 행위라는 블록을 생성할수있음
+
+// function test() { // 이안의 구역을 test라는 function의 블록이라 지칭 
+//  var j = 0;
+//  console.log(j); // 0
+//  console.log(i); // 1
+// }
+
+// console.log(j); // j를 찾을수 없음으로 에러발생
+// console.log(i); // 1
+
+
+// 1-2. 절차지향과 객체지향의 차이
+
+// 절차지향: C언어, Python
+// 소스가 동작되는 방식이 순서대로 흘러간다. 
+
+// int i = 0; 
+// printf(%d, i); // 0;
+
+
+// 객체지향: C++, Java, C#, .....
+// Object, Class, Interface
+
+// 자동차 만드는 방식 
+
+// 자동차 부품: 바퀴, 핸들, 차채, 엔진
+
+// 절차지향: 자동차의 바퀴를 만들고 핸들 차채를 엔진을 이거를 처리하는 엔진이 분할 실행이 안됨 한번 실행해서 실행 한번에 모든 사이클이 돌아야함
+
+// 객체지향: 자동차라는 프로젝트 수례(주체) ,자동차(주체)  호출하여 사용한다. ->  바퀴(객체) 핸들(객체) 엔진(객체) 
+// ex:  
+// 바퀴 i = 바퀴();
+// 엔진 j = 엔진();
+// printf(i, j, k ); // 바퀴 엔진 핸들.....
+ 
+
+// int(상수) i = 0;
+// int j  = 캐릭터; X
+
+// 2. 호이스팅
+
+// 3. 표현식이랑 선어식
+
+// 동기: 순서대로 흘러간다.
+// 비동기: 함수
+
+
+// 4-1. 동기, 비동기 : 실행되는 소스의 흐름
+
+// 4-2. 클로저, 콜백
+
+// 주체에서 
+
+// val a = 1;
+// val b = 2;
+
+// function a를 출력하는함수(){
+//  console.log(a); //1
+//  b(); // 콜백해서 호출
+// }
+
+// function b() {
+//  console.log(b); // 2    
+// }
+
+// a(); //
+
+</script>
+</body>
+</html>
