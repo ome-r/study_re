@@ -3,12 +3,12 @@
 function back() {
     setTimeout(function() {
          return "back";
-    }, 1000);
+    }, 1000); // 이렇게 하면 b에서는 undefined가 나온다. 
 }
 function hell() {
     setTimeout(function() {
     }, 1000);
-    return "hell";
+    return "hell"; //이렇게 해야만 값이 나온다. 
 }
 
 let a = call('kim');
