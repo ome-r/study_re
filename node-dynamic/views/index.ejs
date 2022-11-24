@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">  </script>
+ 
+    <title>Document</title>
+    <script>
+        function sendGet(){
+            //axios get을 이용한 통신
+            var form = document.getElementById("form_info");  // 특정 아이디로 지정해서 가져오기 : 이는 form태그에서만 가능하다.
+            // form.name.value 값이 name인 애를 가져오겠다  
+            // form.age.value 값이 age인 애를 가져오겠다
+            axios({
+                method : "get", // get 메소드로 보내겠다
+                url : "/form", // 어떤 경로로 보내겠다
+                params: {name : form.name.value, //get은 params로 담아서 보내고 
+                        gender : form.gender.value,
+                        birth : form.birth.value,
+                        birthMonth : form.birthMonth.value,
+                        birthDay : form.birthday.value}
+                }).then(function(res) { //axios함수는 요청에 대한 응답을 전부 다 보내준다. 이때 프라미스가 바탙이므로 then을 사용한다. 
+                    // console.log(res);
+                    alert(res.data); // (응답전체가 오는데, 그중 원하는 res.send의 데이터는 data에 들어간다) res.data = {"이름은 : " ~~~~}로 들어온다. 
+                });
+                //  .catch(function (error) {
+                //   console.log(error);
+                // })
+                // .then(function () {
+                //     // always executed (try catch finally에서 finally부분)
+                // }); //axios를 이용해서 프로미스가 던져지면 서버에 데이터로 온다 
+        }
+        function sendPost(){
+            var form = document.getElementById("form_info"); 
+            axios({
+                method : "post", // post 메소드로 보내겠다
+                url : "/form", // 어떤 경로로 보내겠다
+                data: { id : form.id.value,
+                        pw : form.pw.value }
+                       // name : form.name.value, //post는 data로 담아서 보낸다 
+                        // gender : form.gender.value,
+                        // birth : form.birth.value,
+                        // birthMonth : form.birthMonth.value,
+                        // birthDay : form.birthday.value}
+                }).then(function(res) { //axios함수는 요청에 대한 응답을 전부 다 보내준다. 이때 프라미스가 바탙이므로 then을 사용한다. 
+                    // console.log(res);
+                   // (응답전체가 오는데, 그중 원하는 res.send의 데이터는 data에 들어간다) res.data = {"이름은 : " ~~~~}로 들어온다. 
+                    document.querySelector("#result").innerHTML = res.data;
+                });
+        }
+        // AJAX로 GET, POST 보내기
+        function sendAjaxGet() {
+        var form = document.getElementById("form_info");  // 특정 아이디로 지정해서 가져오기 : 이는 form태그에서만 가능하다.
+    
+        // ajax 통신 부분
+        // var params = { name : form.name.value, //get은 params로 담아서 보내고 
+        //                 gender : form.gender.value,
+        //                 birth : form.birth.value,
+        //                 birthMonth : form.birthMonth.value,
+        //                 birthDay : form.birthday.value }
+            $.ajax({
+                url: 'ajax',
+                type: 'GET',
+                 data: {name : form.name.value, //get은 params로 담아서 보내고 
+                        gender : form.gender.value,
+                        birth : form.birth.value,
+                        birthMonth : form.birthMonth.value,
+                        birthDay : form.birthday.value},
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        }
+        function sendAjaxPost() {
+            var form = document.getElementById("form_inform");  // 특정 아이디로 지정해서 가져오기 : 이는 form태그에서만 가능하다.
+            $.ajax({
+                url: '/ajax',
+                type: 'POST',
+                data: { id : form.id.value,
+                        pw : form.pw.value },
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        }
+        // fetch 로 GET, POST 보내기
+        function sendFetchGet() {
+        var form = document.getElementById("form_info"); 
+        fetch("/fetch?name=이름", {
+        method: "get"
+            }).then(function(response) {
+                    return response.json();
+                }).then(function(result){
+                    console.log("sendFetchGet");
+                    document.querySelector("#result").innerHTML = result.msg;
+                });
+     }
+        function sendFetchPost() {
+            var form = document.getElementById("form_inform"); 
+            fetch("/fetch", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id : form.id.value,
+                pw : form.pw.value
+            }),
+          }).then(function(response) {
+                    return response.json();
+                }).then(function(result){
+                    console.log("fsendFetchPost");
+                    document.querySelector("#result").innerHTML = result.msg;
+                }); }
+    </script>
+</head>
+<body>
+    <button type="button" onclick="sendGet();">get전송</button>
+    <button type="button" onclick="sendPost();">post전송</button> <hr>
+
+    <button type="button" onclick="sendAjaxGet();">ajax - get전송</button>
+    <button type="button" onclick="sendAjaxPost();">ajax - post전송</button> <hr>
+
+    <button type="button" onclick="sendFetchGet();"> Fetch - get전송</button>
+    <button type="button" onclick="sendFetchPost();"> Fetch - post전송</button> <hr>
+
+    <!-- 사용자가 입력한 값을 보내주기 -->
+    <form id="form_info">
+        <input type="text" name="name" required> 이름
+        <fieldset>
+            <legend>성별</legend>
+            <input type="radio" name="gender" value="남자" id="man" required> <label for="man">남자</label>
+            <input type="radio" name="gender" value="여자" id="woman" required> <label for="woman">여자</label>  
+        </fieldset>
+
+        <fieldset>
+            <legend>생년월일</legend>
+            <select name="birth">
+                <% for(var i=1900; i<=3000 ; i ++ ) { %>
+                    <option value="<%=i%>"><%=i%></option>
+                    <%}%>
+            </select>년
+            <select name="birthMonth">
+                <% for(var i= 1; i<=12 ; i ++ ) { %>
+                    <option value="<%=i%>"><%=i%></option> <label>월</label>
+                    <%}%>
+            </select>월
+            <select name="birthday">
+                <% for(var i=1 ; i<=31 ; i ++ ) { %>
+                    <option value="<%=i%>"><%=i%></option> <label>일</label>
+                    <%}%>
+            </select>일
+        </fieldset>
+        
+        <fieldset>
+            <legend>관심사</legend>
+            <input type="checkbox" name="interest" value="여행"/> 여행
+            <input type="checkbox" name="interest" value="패션"/> 패션
+            <input type="checkbox" name="interest" value="음식"/> 음식
+        </fieldset>
+
+        <fieldset>
+            <legend>선택</legend>
+            좋아하는 색상 <input type="color" name="color"> <br>
+            좋아하는 숫자 <input type="number" name="num"> <br>
+        </fieldset>
+
+        <button type="submit">회원가입</button>
+
+    </form>
+    <!-- post 실습용  -->
+    <form id="form_inform">
+        <input type="text" name="id" required> ID를 입력하세요
+        <input type="text" name="pw" required> 비밀번호를 입력하세요
+    </form> <br>
+
+    <div id="result"><p></p></div>
+</body>
+</html>
