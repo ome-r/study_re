@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+    <script>
+        function sendGet(){
+            //axios get을 이용한 통신
+            axios({
+                method : "get", //어떤 메소드로 보내겠다
+                url : "/forms", // 어떤 경로로 보내겠다
+                params: { //보내는 값
+                    name: "condingon"
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <button type="button" onclick="sendGet();">get전송</button>
+    <button type="button" onclick="sendPost();">post전송</button>
+
+    <form action="/getform" method="get">
+        <input type="text" name="이름" required/> 이름 <br>
+        <!-- <input type="text" name="id" pattern="/^[a-zA-Z]\w{2,7}$/u" required> ID <br> -->
+        <!-- <input type="text" name="mail" pattern= "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/"required> Email <br> -->
+        <!-- 시작과 끝에 //로 감싸고, ^$로 시작하고 닫는다. 그 안에 대괄호로 내용을 넣어준다. 역슬래시\를 넣으면 특수기호를 일반문자로 취급한다. +를 통해 이어질 내용을 추가한다.-->
+        <fieldset>
+            <legend>성별</legend>
+            <input type="radio" name="gender" value="남자" id="man"> <label for="man">남자</label>
+            <input type="radio" name="gender" value="여자" id="woman"> <label for="woman">여자</label>  
+        </fieldset>
+
+        <fieldset>
+            <legend>생년월일</legend>
+            <select name="birth">
+                <% for(var i=1900; i<=3000 ; i ++ ) { %>
+                    <option value="<%=i%>"><%=i%></option>
+                    <%}%>
+            </select>년
+            <select name="birthMonth">
+                <% for(var i= 1; i<=12 ; i ++ ) { %>
+                    <option value="<%=i%>"><%=i%></option> <label>월</label>
+                    <%}%>
+            </select>월
+            <select name="birthday">
+                <% for(var i=1 ; i<=31 ; i ++ ) { %>
+                    <option value="<%=i%>"><%=i%></option> <label>일</label>
+                    <%}%>
+            </select>일
+        </fieldset>
+        
+        <fieldset>
+            <legend>관심사</legend>
+            <input type="checkbox" name="interest" value="여행"/> 여행
+            <input type="checkbox" name="interest" value="패션"/> 패션
+            <input type="checkbox" name="interest" value="음식"/> 음식
+        </fieldset>
+
+        <button type="submit">회원가입</button>
+    </form>
+
+    <hr>
+    <form action="/postform" method="post">
+        <input type="text" name="이름" required> 이름
+
+        <input type="text" name="id" pattern="/^[a-zA-Z]\w{2,7}$/u" > ID <br>
+        <input type="text" name="mail" pattern= "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/"> Email <br>
+        <!-- 시작과 끝에 //로 감싸고, ^$로 시작하고 닫는다. 그 안에 대괄호로 내용을 넣어준다. 역슬래시\를 넣으면 특수기호를 일반문자로 취급한다. +를 통해 이어질 내용을 추가한다.-->
+        <input type="text" pattern="^\d{3}-\d{3,4}-\d{4}$" placeholder="010-0000-0000" required> 전화번호
+        <fieldset>
+            <legend>성별</legend>
+            <input type="radio" name="gender" value="남자" id="man" required> <label for="man">남자</label>
+            <input type="radio" name="gender" value="여자" id="woman" required> <label for="woman">여자</label>  
+        </fieldset>
+
+        <fieldset>
+            <legend>생년월일</legend>
+            <select name="birth">
+                <% for(var i=1900; i<=3000 ; i ++ ) { %>
+                    <option value="<%=i%>"><%=i%></option>
+                    <%}%>
+            </select>년
+            <select name="birthMonth">
+                <% for(var i= 1; i<=12 ; i ++ ) { %>
+                    <option value="<%=i%>"><%=i%></option> <label>월</label>
+                    <%}%>
+            </select>월
+            <select name="birthday">
+                <% for(var i=1 ; i<=31 ; i ++ ) { %>
+                    <option value="<%=i%>"><%=i%></option> <label>일</label>
+                    <%}%>
+            </select>일
+        </fieldset>
+        
+        <fieldset>
+            <legend>관심사</legend>
+            <input type="checkbox" name="interest" value="여행"/> 여행
+            <input type="checkbox" name="interest" value="패션"/> 패션
+            <input type="checkbox" name="interest" value="음식"/> 음식
+        </fieldset>
+
+        <fieldset>
+            <legend>선택</legend>
+            좋아하는 색상 <input type="color" name="color"> <br>
+            좋아하는 숫자 <input type="number" name="num"> <br>
+        </fieldset>
+
+        <button type="submit">회원가입</button>
+
+    </form>
+</body>
+</html>

@@ -41,6 +41,22 @@ app.get('/img', (req,res)=> {
     }); //이제 이 모든 데이터는 index.ejs로 넘겨주었다. 가서 활용하면 된다.
 })
 
-app.listen( port, ()=> { //listen이라는 메소드를 통해 웹서버를 연다. 이때 인저는 두개 (포트번호, 함수)
+// form 태그 사용하는 서버 만들기
+app.get("/form", (req,res)=>{
+    res.render("form");
+})
+
+app.get("/getform", (req,res)=>{ // 원래 라우터였던 form에서 getform라우터로 이동한 다음 send안에 문자열이 보이게 된다.
+    console.log(req.query); // 클라이언트가 서버에 보내는 요청 중 'query'를 찍는다. 이는 ?뒤에 있는 것들로 터미널에 출력이 된다.
+    res.send("get 요청성공!");
+})
+
+//post 요청 받기 == post 메소드 사용
+app.post("/postform", (req,res)=>{ // 원래 라우터였던 form에서 postform라우터로 이동한 다음 send안에 문자열이 보이게 된다.
+    console.log(req.body); // 클라이언트가 서버에 보내는 요청을 body에 받아온다. (get과 차이)
+    res.send("post 요청성공!");
+})
+
+app.listen( port, ()=> { //listen이라는 메소드를 통해 웹서버를 연다. 이때 인자는 두개 (포트번호, 함수)
     console.log("server open :", port);
 }); 
