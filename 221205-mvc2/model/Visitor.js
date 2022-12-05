@@ -30,3 +30,16 @@ exports.register_vistior = (info, cb) =>{ //req.body와 cb을 각각 인자로 �
     cb(result.insertId); //insertId를 넘겨주겠다  
     })
 }
+
+//delete파트 
+
+exports.delete_visitor = (id ,cb) => { //id를 매개변수로 받아와야 그 아래에서 삭제할 수 있다. 
+    var sql = `delete from visitor where id = ${id}`;
+
+    cnn.query(sql, (err, result)=>{ //sql을 실행한 다음 err랑 result를 받아올 함수 작성 
+        if (err) throw err;
+
+        console.log("delete result :", result); //잘 되는 지 콘솔에 찍기 
+        cb(); //인자 보낼건 없고 응답만 보냄 
+    })
+}

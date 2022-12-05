@@ -15,3 +15,11 @@ exports.register = (req, res) => { // req.body는 사용자가 보내주는 값�
     //insert 데이터 : req.body안의 것들을 받아와야 한다 
     // 
 }
+
+//새로 만든 delete 
+exports.delete = (req,res)=>{
+    //1. mysql에서 req.body.id에 해당하는 데이터를 delete를 할 것이다.(모델에서 할 것) 2. delete한 것을 서버에 응답 즉 res.send해야한다. 
+       Visitor.delete_visitor(req.body.id, function(){
+           res.send(true); //삭제만 잘 되면 응답만 보내면 되므로 true만 보낸다. 클라이언트가 끝난걸 알게 만들기 위해, res.send는 반드시 있어야한다. 안에 res.send("성공");이렇게 해도 된다
+       })
+   }

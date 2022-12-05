@@ -22,7 +22,7 @@
                 <button type="button" onclick="register();">등록</button>
             </div>
         </fieldset>
-	</form>
+    </form>
 
     <table cellspacing="0" cellpadding="10" style="margin-top: 30px;">
         <tr>
@@ -37,11 +37,28 @@
                 <td><%=data[i].id%></td>
                 <td><%=data[i].name%></td>
                 <td><%=data[i].comment%></td>
-                <td><button type="button">수정</button></td>
-                <td><button type="button">삭제</button></td>
+                <td><button type="button" onclick="update_load('<%=data[i].id%>', this);">수정</button></td>
+                <td><button type="button" onclick="delete_visitor('<%=data[i].id%>', this);">삭제</button></td>
+                <!-- tag에 함수를 달 때, 함수의 인자로 this를 넘겨주면, 함수가 걸려있는 태그가 this 안에 담긴다. 여기서 this의 부모는 td, tr에도 접근가능 
+                그러면 this를 받는 element에 있는 부모의 부모(parent)인 tr을 삭제할 수 있다!-->
             </tr>
         <% } %>
     </table>
+<!-- delete 키 만들고 동적으로 연결하기 따라서 axios사용, 이때 삭제는 PK 프라이머리키가 되어있는 경우에 사용가능 -->
+    <script>
+        function delete_visitor(delete_id, element){
+            axios({
+                method : 'delete',
+                url : '/visitor/delete',
+                data : {id : delete_id}
+            })
+            .then((response)=>{
+                if(response.data) element.parentElement.parentElement.remove(); 
+                else alert("알 수 없는 오류 발생!");
+                // element.parantElement.parantElement.remove(); 
+            })
+        }
+    </script>
 
     <script>
         function register(){
@@ -64,8 +81,8 @@
                     <td>${response.data}</td>
                     <td>${data.name}</td>
                     <td>${data.comment}</td>
-                    <td><button type="button">수정</button></td>
-                    <td><button type="button">삭제</button></td>
+                <td><button type="button" onclick="update_load(${response.data}, this);">수정</button></td>
+                <td><button type="button" onclick="delete_visitor(${response.data}, this);">삭제</button></td>
                 </tr>
                     `)
             })
