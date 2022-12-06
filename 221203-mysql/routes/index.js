@@ -11,8 +11,14 @@ router.post("/register", controller.register); // 등록 버튼 연결
 router.get("/login", controller.login); // 로그인 페이지로 넘어가기, 로그인 함수 만들기 
 
 router.delete("/delete",controller.delete); //삭제하기 
+ 
+router.post("/profile", controller.profile);  //axios
 
-router.post("/profile", controller.profile); 
+router.post("/profileView", controller.profileView); //form 
+
+router.patch("/profile/edit", controller.profileEdit); //Edit 
+
+// router.delete("/profile/edit", controller.profileDelete); //delete 
 
 // router.patch("/update", controller.update_visitor); // 컨트롤러에 있는 함수와 연결 
 

@@ -47,14 +47,36 @@ exports.delete_visitor = (id ,cb) => { //id를 매개변수로 받아와야 그 
     })
 }
 
-exports.get_user = (id, cb) => {
+exports.update_visitor = (data, cb) => {
+    let sql = `UPDATE myuser SET name='${data.name}', pw='${data.pw}' WHERE id='${data.id}'`;
+    cnn.query( sql, ( err ) => {
+        if ( err ) throw err;
+        cb();
+    })
+
+}
+
+exports.login = (id, pw, cb) => {
     // id를 통해서 사용자 정보를 가져온다
-    var sql = `select * from myuser where id = '${id}'`;
+    var sql = `select * from myuser where id = '${id}' and pw= '${pw}' limit 1;`; //id pw가 값이 있으면 length가 생길테니 그걸로 성공여부를 판단
 
     cnn.query(sql, (err, result)=>{ //sql을 실행한 다음 err랑 result를 받아올 함수 작성 
         if (err) throw err;
 
         console.log("user info :", result); //잘 되는 지 콘솔에 찍기 
         cb(result);  
+    });
+}
+
+
+exports.get_user = (id, cb) => {
+    // id를 통해서 사용자 정보를 가져온다
+    var sql = `select * from myuser where id = '${id}'`; //id pw가 값이 있으면 length가 생길테니 그걸로 성공여부를 판단
+
+    cnn.query(sql, (err, result)=>{ //sql을 실행한 다음 err랑 result를 받아올 함수 작성 
+        if (err) throw err;
+
+        console.log("user info :", result); //잘 되는 지 콘솔에 찍기 
+        cb(result[0]);  
     });
 }

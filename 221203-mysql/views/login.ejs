@@ -19,7 +19,7 @@
 
 </head>
 <body>
-    <form id="form_register">
+    <form id="form_register" action="/user/profileView" method="post">
         <div class="row" style="margin: 20px 20px;">
             <h3>WELCOME!</h3>
         </div>
@@ -39,13 +39,10 @@
         <div class="row">
             <p class="margin" style="margin: 20px 20px 20px 20px;">회원을 탈퇴하시겠습니까? 다시 생각해보세요...</p>
         </div>
-        <div style="text-align:center;" id="result">
+        <div  id="result">
             <button type="button" class="btn btn-outline-danger" style="width: 300px; margin: 20px 20px 20px 20px;" onclick='delete_visitor();'>계정삭제</button>
         </div>
-
-
-</head>
-<body>
+    </form>
 
     <script>
             function login_user(){
@@ -57,19 +54,33 @@
                 pw: form.pw.value,
                 name: form.name.value}
             })
-            .then(function(res){
+            .then(function(resp) 
+            {
+                console.log(resp)
+                return resp.data;
+            })
+            .then((data) => {
                 // console.log(res.data);
                 // console.log(res.data[0].id);
-                let user_info = res.data[0];
-                //로그인 처리
-                if (form.id.value == user_info.id) {
-                    if (form.pw.value == user_info.pw) {
-                        console.log("로그인 성공!");
-                        window.location.href = "/user/profile";
+                // let user_info = res.data[0];
+                //로그인 처리는 프론트딴에서 하지말고 서버에서 한다. 
+                // if (form.id.value == user_info.id) {
+                //     if (form.pw.value == user_info.pw) {
+                //         console.log("로그인 성공!");
+                //         // window.location.href = "/user/profile"; 이렇게 하면 get이므로 profile은 post로 보내주기 위해 폼전송으로 해야한다.
+                //     }
+                // } else {
+                //     console.log("id나 PW가 동일하지 않습니다");
+                //     form.reset();
+                // }
+                if ( data == true ){
+                        alert("로그인 성공");
+
+                        form.submit();
+                    } else {
+                        alert("로그인 실패");
+                        form.reset();
                     }
-                } else {
-                    console.log("id나 PW가 동일하지 않습니다");
-                }
             }); 
         }
         //짧게 처리시
@@ -79,7 +90,6 @@
         //  } else {
         //     console.log("id 또는 pw가 다릅니다.")
         //   }
-
         function delete_visitor(){
             let form = document.getElementById("form_register");
             let data = {
