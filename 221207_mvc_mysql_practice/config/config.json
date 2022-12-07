@@ -1,0 +1,17 @@
+{ 
+  "development" : { 
+        "host": "localhost",    
+        "database" : "sesac",  
+        "username" : "user",
+        "password": "marin45",
+        "dialect": "mysql"  
+    },
+
+    "production" : {
+        "host": "localhost",   
+        "database" : "sesac", 
+        "username" : "user", 
+        "password": "marin45",
+        "dialect": "mysql" 
+    }
+}
