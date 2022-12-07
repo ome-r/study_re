@@ -1,25 +1,111 @@
-const Visitor = require("../model/Visitor"); //visitor라는 모델 연결
+const { Visitor } = require("../model"); //객체구조분해 할당. visitor만 필요, index.js는 생략가능 
 
-exports.visitor = (req,res) => { //가장 기본 라우터에 대한 함수 정의, visitor에 들어오면 이 일을 하겠다. 
-    Visitor.get_visitor(function(result){ //이 함수를 model에 넘겨준다 cb (콜백함수)를 인자로 넘겨준것
+exports.visitor = async (req, res) => { //sequelize는 프라미스이므로 then 사용하기 >> async await도 사용가능! 
+    let result = await Visitor.findAll(); //시퀄라이즈 모듈은 순서대로 실행하기 위해 프라미스를 사용했다. 가독성이 좋게 하기 위해 async await 사용 
+    // 기다렸다가  Visitor.findAll(); 이거 실행해서 result에 담은 다음에, 그 아래로 가서 render하기 위해 사용! 
+    // then으로 받아올 것을 let result에 담은 것이므로 then은 사용하지 않는다. 
+    res.render("visitor", {data: result}); 
+    
+}
+//     Visitor.findAll()  // select * from visitor; 다 가져오는 함수 사용 
+//     .then((result)=>{  // 결과값은 result
+//         console.log(result);
+//         console.log("id :", result[0].id); 
+//         res.render("visitor", {data: result});
+//     })
+// }
+//     select * from visitor; 
+
+//     Visitor.get_visitor(function(result){
+//         console.log(result);
+//         res.render("visitor", {data: result});
+//     })
+// }
+
+exports.register = async (req, res) => {
+    let data = {
+        name: req.body.name,
+        comment: req.body.comment
+    }
+    let result = await Visitor.create(data)
         console.log(result);
-        res.render("visitor", { data: result }); // 할일이 다끝나면 응답을 한다 visitor라는 ejs를 렌더. function에 있는 매개변수 result를 data로 
-    });
-}
- 
-exports.register = (req, res) => { // req.body는 사용자가 보내주는 값을 통째로 넘기기 위해 사용한다 
-    Visitor.register_vistior( req.body, function(id){ //이 함수를 model에 넘겨준다 cb (콜백함수)를 인자로 넘겨준것
-            console.log(id);    
-            res.send(String(id)); // 할일이 다끝나면 응답을 한다, 이때 result는 쿼리를 날려서 나온 결과값이다. 이때 id 하나만 넘겨준다(model에서 그렇게 정의했으므로)
-        }); //숫자를 보내기 때문에 string을 넣는다 send에는 숫자만 들어갈 수 없기 대문 
-    //insert 데이터 : req.body안의 것들을 받아와야 한다 
-    // 
+        res.send(String(result.id));
+    }
+
+    // insert into visitor (name,comment) values('${req.body.name}','${req.body.name}');
+    // Visitor.register_visitor( req.body, function(id){
+    //     console.log(id);
+    //     res.send(String(id));
+    // })
+
+
+exports.delete = async(req, res) => {
+    let result = await Visitor.destroy({ 
+        where : {id : req.body.id}
+    })
+
+    console.log(result);
+    res.send(true);
+    // delete from visitor where id = '${req.body.id}'를 하겠다는 의미 
+    // mysql req.body.id에 해당하는 데이터를 delete
+    // 서버 응답 res.send 
+    // Visitor.delete_visitor(req.body.id, function(){
+    //     res.send(true);
+    // })
 }
 
-//새로 만든 delete 
-exports.delete = (req,res)=>{
-    //1. mysql에서 req.body.id에 해당하는 데이터를 delete를 할 것이다.(모델에서 할 것) 2. delete한 것을 서버에 응답 즉 res.send해야한다. 
-       Visitor.delete_visitor(req.body.id, function(){
-           res.send(true); //삭제만 잘 되면 응답만 보내면 되므로 true만 보낸다. 클라이언트가 끝난걸 알게 만들기 위해, res.send는 반드시 있어야한다. 안에 res.send("성공");이렇게 해도 된다
-       })
-   }
+exports.get_visitor_by_id =  async (req, res) => {
+    let result = await Visitor.findOne({ 
+        where : {id : req.query.id}
+    })  
+       res.send(result); 
+        console.log("result", result);
+
+    // req.query.id 에 해당하는 데이터를 조회
+    // 서버 응답 > 조회한 데이터
+
+    // findAll과 fineOne 둘 모두 사용가능하다 차이는 다음과 같다 
+    // Visitor.findAll({ 
+    //     where : {id : req.query.id},
+    //     limit : 1 
+    //  })
+    // Visitor.findOne({     //select * from visitor where id = req.query.id; 
+    //     where : {id : req.query.id}
+    //  })
+    //  .then((result) => {
+    //     res.send(result); 
+    //  })
+
+    // Visitor.get_visitor_by_id_model(req.query.id, function(rows){
+    //     res.send(rows);
+    // });
+}
+
+exports.update_visitor = async (req, res) => {
+    
+    let data = {
+        name : req.body.name,
+        comment : req.body.comment
+    }
+    console.log(req.body.id);
+    console.log(data);
+    let result = await Visitor.update(data, {
+        where: {id: req.body.id}
+    })
+    console.log(result);
+    res.send(true); //나 업뎃성공했어! 
+}
+
+    // Visitor.update(data, {  //인자 2개를 받는다 1. 어떻게 업뎃할지 2. 조건 (where id = '${req.body.id}')
+    //     where: {id : req.body.id}
+    // }) 
+    // .then((result)=>{
+    //     console.log(result);
+    //     res.send(true); //나 업뎃성공했어! 
+    // })
+    // update visitor set name='${req.body.name}', comment='${req.body.comment}' where id = '${req.body.id}'' 
+    // req.body 데이터를 mysql 에 update 할 수 있도록
+    // 서버의 응답 
+//     Visitor.update_visitor(req.body, function(){
+//         res.send(true);
+//  
