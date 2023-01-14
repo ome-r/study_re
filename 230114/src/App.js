@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import './App.css';
+import ChangeObj from './components/ChangeObj';
+import CustomList from './components/CustomList';
+import CustomObj from './components/CustomObj';
+import Items from './components/Items';
 // import Emoji from './components/Emoji';
 import List from './components/List';
 // import SetState from './components/SetState';
@@ -12,10 +16,38 @@ import List from './components/List';
 
 function App() {
   // const [condition, setCondition] = useState(true);
-
+  // const nameArr = ['뽀로로', '루피', '크롱이'];
+  // const pororoObj = {
+  //   name: '뽀로로',
+  //   age: '5',
+  //   nickName: '사고뭉치',
+  // };
+  const pororoObjArr = [
+    {
+      name: '뽀로로',
+      age: '5',
+      nickName: '사고뭉치',
+    },
+    {
+      name: '루피',
+      age: '4',
+      nickName: '공주님',
+    },
+    {
+      name: '크롱이',
+      age: '5',
+      nickName: '장난꾸러기',
+    },
+  ];
   return (
     <div className="App">
-      <List />
+      <ChangeObj objArr={pororoObjArr} />
+      {/* <CustomObj obj={pororoObj} /> */}
+
+      {/* <CustomList arr={nameArr} /> */}
+
+      {/* <Items /> */}
+      {/* <List /> */}
       {/* <SetState /> */}
       {/* <Emoji /> */}
       {/* <button onClick={() => setCondition(!condition)}>컨디션 변경</button>{' '}

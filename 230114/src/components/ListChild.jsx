@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function ListChild({ title, content }) {
+export default function ListChild({ title, detail }) {
   return (
     <>
       <h2>{title}</h2>
-      <p>{content}</p>
+      <p>{detail}</p>
       <hr />
     </>
   );
