@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- islogin이 false인 경우 -->
+    <% if ( !islogin ) {%>
+    <a href="/s_login"> 로그인</a>
+    <a href="/s_register">회원가입</a>
+    <!-- islogin이 true인 경우 -->
+    <% } else {%>
+        <div> <%=id%>님 환영합니다.</div>
+        <!-- 하이퍼링크는 기본적으로 get 요청이다. 링크를 강제 변경하므로 -->
+        <a href="/s_logout">로그아웃</a>
+    <% } %>
+</body>
+</html>
