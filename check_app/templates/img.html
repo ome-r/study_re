@@ -1,0 +1,75 @@
+<html>
+	<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="{{ url_for('static', filename='index.css') }}"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://code.jquery.com/jquery-3.7.0.min.js"
+			integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+			crossorigin="anonymous"
+		></script>
+		<script src="{{ url_for('static', filename='index.js') }}"></script>
+	</head>
+	<body>
+		<h1>2023 전자전기공학부 SW 특강 (머신러닝/딥러닝 부트캠프)</h1>
+		<button onclick="mvIndex()">출석체크</button>
+		<button onclick="mvSearch()">검색</button>
+		<button onclick="mvImgCheck()">확인</button>
+
+		<!-- <p>
+			<img
+				src="{{ url_for('static', filename='0818_0.jpg') }}"
+				width="800"
+			/>
+		</p>
+		<p>
+			<img
+				src="{{ url_for('static', filename='0818_1.jpg') }}"
+				width="800"
+			/>
+		</p>
+		<p>
+			<img
+				src="{{ url_for('static', filename='0817_0.jpg') }}"
+				width="800"
+			/>
+		</p>
+		<p>
+			<img
+				src="{{ url_for('static', filename='0817_1.jpg') }}"
+				width="800"
+			/>
+		</p>
+		<p>
+			<img
+				src="{{ url_for('static', filename='0816_9_0.jpg') }}"
+				width="800"
+			/>
+		</p>
+		<p>
+			<img
+				src="{{ url_for('static', filename='0816_9_1.jpg') }}"
+				width="800"
+			/>
+		</p>
+		<p>
+			<img
+				src="{{ url_for('static', filename='0815.jpg') }}"
+				width="800"
+			/>
+		</p>
+		<p>
+			<img
+				src="{{ url_for('static', filename='0815_1.jpg') }}"
+				width="800"
+			/>
+		</p> -->
+	</body>
+</html>

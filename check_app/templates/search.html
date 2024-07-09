@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="{{ url_for('static', filename='index.css') }}"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://code.jquery.com/jquery-3.7.0.min.js"
+			integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+			crossorigin="anonymous"
+		></script>
+		<script src="{{ url_for('static', filename='index.js') }}"></script>
+	</head>
+	<body>
+		<h1>출석체크APP</h1>
+		<button onclick="mvIndex()">출석체크</button>
+		<button onclick="mvSearch()">검색</button>
+		<button onclick="mvImgCheck()">확인</button>
+	<div class="container"
+		<p>
+			출석 저장을 확인하기 위해 검색해보세요. 날짜의 경우 yyyy-mm-dd
+			형태로 입력해주세요.
+		</p>
+
+		<form method="post" id="searchform">
+			<select name="selecttag" id="selecttag" form="searchform">
+				<option value="id">학번</option>
+				<option value="name">이름</option>
+				<!-- <option value="seat">좌석</option>
+				<option value="date">날짜</option> -->
+			</select>
+			<input type="text" id="searchtext" name="searchtext" />
+			<input type="submit" value="검색" />
+		</form>
+
+		{% for table in tables %}
+		<table>
+			<thead>
+				<tr>
+					<td>{{titles[loop.index]}}</td>
+				</tr>
+			</thead>
+			<tbody>
+				{{ table|safe }}
+			</tbody>
+		</table>
+		{% endfor %}
+	</div>
+	</body>
+</html>

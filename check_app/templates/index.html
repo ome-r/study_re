@@ -1,0 +1,97 @@
+<html>
+	<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="{{ url_for('static', filename='index.css') }}"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://code.jquery.com/jquery-3.7.0.min.js"
+			integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+			crossorigin="anonymous"
+		></script>
+		<script src="{{ url_for('static', filename='index.js') }}"></script>
+	</head>
+	<body>
+		
+		<h1>출석체크APP</h1>
+		<button onclick="mvIndex()">출석체크</button>
+		<button onclick="mvSearch()">검색</button>
+		<button onclick="mvImgCheck()">확인</button>
+
+		<!-- <p>설문 링크입니다</p>
+		<p>https://forms.gle/LuFj4XqQykPjrSVi7</p> -->
+
+		<p>출석체크를 위해서 내용을 입력하신 후 제출 버튼을 눌러주세요.</p>
+
+		<form method="post" id="attend_check" action="/localhost:8080">
+			<label for="name">성함 </label>
+			<input
+				minlength="2"
+				maxlength="4"
+				required
+				id="name"
+				type="text"
+				name="name"
+				placeholder="성함을 입력해주세요"
+				value="{{ request.form['name'] }}"
+			/>
+			<br />
+			<label for="id">학번 </label>
+			<input
+				required
+				id="id"
+				type="text"
+				name="id"
+				placeholder="학번을 입력해주세요"
+				value="{{ request.form['id'] }}"
+
+				// 입력 필드 초기화
+				document.getElementById('name').value = '';
+				document.getElementById('id').value = '';
+				// 추가된 필드도 여기에 초기화 코드 추가 가능
+				
+				// 폼 제출 후 페이지 리프레시 방지
+				return false;
+
+			/>
+			<!-- <br />
+			<label for="seat">좌석 </label>
+			<input
+				minlength="1"
+				maxlength="2"
+				required
+				id="seat"
+				type="text"
+				name="seat"
+				placeholder="좌석을 입력해주세요"
+				value="{{ request.form['seat'] }}"
+			/>
+			<br />
+			<label for="memo">메모 </label>
+			<input
+				maxlength="100"
+				id="memo"
+				type="text"
+				name="memo"
+				placeholder="전달사항 필요 시 입력해주세요"
+				value="{{ request.form['memo'] }}"
+			/>
+			<br />
+			<br /> -->
+			<button type="submit">제출</button>
+		</form>
+
+		{% if result %}
+		<p>{{result.name}} 님, 출석체크가 완료되었습니다.</p>
+		<p>완료시간 : {{result.date}}</p>
+		{% else %}
+		<p></p>
+		{% endif %}
+	</body>
+</html>
